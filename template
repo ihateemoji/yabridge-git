@@ -21,7 +21,7 @@ do_build() {
 
 do_install() {
     vmkdir usr/bin
-    for f in ${wrksrc}/build/yabridge-host{,-32}.exe{,.so}; do
+    for f in ${wrksrc}/build/yabridge-host.exe{,.so}; do
         vbin $f
     done
     vbin ${wrksrc}/tools/yabridgectl/target/release/yabridgectl
