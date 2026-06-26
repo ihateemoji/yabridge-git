@@ -11,22 +11,22 @@ distfiles="https://github.com/robbert-vdh/yabridge/archive/${version}.zip"
 checksum="36ab1c4bdd5808d024ec2bed1a775ab47e5b61f71ebb0bfb77e1c737fa61873f"
 
 do_configure() {
-    meson setup build --buildtype=release --cross-file=cross-wine.conf --unity=on --unity-size=1000
+	meson setup build --buildtype=release --cross-file=cross-wine.conf --unity=on --unity-size=1000
 }
 
 do_build() {
-    ninja -C build
-    (cd tools/yabridgectl; cargo build --release --locked --all-features --target-dir=target)
+	ninja -C build
+	(cd tools/yabridgectl; cargo build --release --locked --all-features --target-dir=target)
 }
 
 do_install() {
-    vmkdir usr/bin
-    for f in ${wrksrc}/build/yabridge-host.exe{,.so}; do
-        vbin $f
-    done
-    vbin ${wrksrc}/tools/yabridgectl/target/release/yabridgectl
-    vmkdir usr/lib
-    for f in ${wrksrc}/build/libyabridge{,-chainloader}-{vst2,vst3,clap}.so; do
-        vcopy $f usr/lib
-    done
+	vmkdir usr/bin
+	for f in ${wrksrc}/build/yabridge-host.exe{,.so}; do
+		vbin $f
+	done
+	vbin ${wrksrc}/tools/yabridgectl/target/release/yabridgectl
+	vmkdir usr/lib
+	for f in ${wrksrc}/build/libyabridge{,-chainloader}-{vst2,vst3,clap}.so; do
+		vcopy $f usr/lib
+	done
 }
